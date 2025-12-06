@@ -1,32 +1,30 @@
+from posix import PRIO_DARWIN_BG
+import tqdm
 from utils.utils import read_input
 
 input_data = read_input('input.txt').split('\n')
 # input_data = read_input('test.txt').split('\n')
 
+sum1 = 0
+sum2 = 0
 
-def get_biggest_voltage(x):
-    x_val = -1
-    x_idx = -1
-    for i in range(len(x)-1):
-        if x[i] > x_val:
-            x_val = x[i]
-            x_idx = i
+def largest_joltage(bank: str, k: int):
+    n = len(bank)
+    pos = 0
+    batteries = []
+    for remaining in range(k, 0, -1):
+        end = n - remaining + 1
+        best_digit = max(bank[pos:end])
+        # print(best_digit)
+        pos = bank.index(best_digit, pos, end) + 1
+        # print(pos)
+        batteries.append(best_digit)
+    return ''.join(batteries)
+
+
+for bank in tqdm.tqdm(input_data):
+    sum1 += int(largest_joltage(bank, 2))
+    sum2 += int(largest_joltage(bank, 12))
     
-    y_val = -1
-    for item in x[x_idx+1:]:
-        if item > y_val:
-            y_val = item
-            # y_idx = i
-    return x_val * 10 + y_val
-        
-# print(get_biggest_voltage(x))
-
-
-print(input_data)
-batteries_voltage = []
-for line in input_data:
-    # print(line)
-    # print(get_biggest_voltage([int(x) for x in line]))
-    batteries_voltage.append(get_biggest_voltage([int(x) for x in line]))
-print("Part 1:")
-print(sum(batteries_voltage))
+print(sum1)
+print(sum2)
