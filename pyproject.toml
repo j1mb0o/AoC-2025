@@ -1,7 +1,21 @@
 [project]
 name = "aoc-2025"
 version = "0.1.0"
-description = "Add your description here"
+description = ""
+authors = [
+    {name = "Dimitris", email = "zinodimitris@gmail.com"}
+]
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.13"
+dependencies = [
+]
+
+# 👇 MOVE THIS SECTION HERE
+[tool.poetry]
+packages = [
+    { include = "utils" }
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
