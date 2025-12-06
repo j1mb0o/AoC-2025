@@ -1,4 +1,3 @@
-from posix import PRIO_DARWIN_BG
 import tqdm
 from utils.utils import read_input
 
